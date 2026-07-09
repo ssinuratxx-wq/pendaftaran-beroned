@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Pendaftaran Fraksi — BERONED ROLEPLAY</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#05070B;
+  --primary:#00BFFF;
+  --accent:#00E5FF;
+  --card:rgba(255,255,255,.06);
+  --card-border:rgba(0,229,255,.18);
+  --text-dim:#9fb3c8;
+  --danger:#ff4d6d;
+  --ok:#00e5a0;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%,rgba(0,191,255,.10),transparent 60%),
+    var(--bg);
+  color:#fff;font-family:'Inter',sans-serif;min-height:100vh;
+  padding:50px 16px 70px;
+  background-image:
+    linear-gradient(rgba(0,191,255,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,191,255,.04) 1px,transparent 1px);
+  background-size:44px 44px;
+}
+.wrap{max-width:560px;margin:0 auto;}
+.logo-box{display:flex;flex-direction:column;align-items:center;margin-bottom:22px;}
+.logo-box img{
+  width:110px;height:110px;border-radius:50%;object-fit:cover;
+  border:2px solid var(--accent);box-shadow:0 0 30px rgba(0,229,255,.5);
+}
+h1{
+  font-family:'Orbitron',sans-serif;font-weight:900;text-align:center;
+  font-size:clamp(20px,5vw,30px);letter-spacing:1px;margin-top:18px;
+  text-shadow:0 0 20px rgba(0,191,255,.4);
+}
+.sub{
+  text-align:center;color:var(--accent);font-family:'Rajdhani',sans-serif;
+  font-weight:600;letter-spacing:3px;font-size:13px;text-transform:uppercase;margin-top:6px;
+}
+.card{
+  background:var(--card);border:1px solid var(--card-border);border-radius:16px;
+  backdrop-filter:blur(10px);padding:26px 22px;margin-top:28px;
+}
+label{
+  display:block;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14.5px;
+  letter-spacing:.5px;color:#dcecf5;margin-bottom:7px;
+}
+select,input,textarea{
+  width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;padding:12px 14px;color:#fff;font-family:'Inter',sans-serif;font-size:14.5px;
+  margin-bottom:18px;transition:border-color .2s ease,box-shadow .2s ease;
+}
+select:focus,input:focus,textarea:focus{
+  outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,229,255,.15);
+}
+textarea{resize:vertical;min-height:80px;line-height:1.5;}
+select option{background:#0a0f16;color:#fff;}
+.radio-row{display:flex;gap:14px;margin-bottom:6px;}
+.radio-opt{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
+  border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:12px;cursor:pointer;
+  font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.5px;
+  transition:all .2s ease;
+}
+.radio-opt input{width:auto;margin:0;accent-color:var(--accent);}
+.radio-opt.checked-yes{border-color:var(--ok);background:rgba(0,229,160,.08);}
+.radio-opt.checked-no{border-color:var(--danger);background:rgba(255,77,109,.08);}
+.form-title{
+  font-family:'Orbitron',sans-serif;font-weight:700;font-size:17px;color:var(--accent);
+  margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.08);
+}
+#formSection{
+  max-height:0;overflow:hidden;opacity:0;
+  transition:max-height .5s ease, opacity .5s ease, margin .5s ease;
+}
+#formSection.open{max-height:3000px;opacity:1;}
+.btn{
+  width:100%;padding:16px;border-radius:12px;border:none;cursor:pointer;
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:16px;letter-spacing:1px;
+  background:linear-gradient(90deg,var(--primary),var(--accent));color:#031018;
+  box-shadow:0 0 25px rgba(0,191,255,.4);transition:transform .2s ease,box-shadow .2s ease;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 35px rgba(0,229,255,.6);}
+.btn:active{transform:scale(.97);}
+.error-msg{
+  color:var(--danger);font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;
+  margin-top:-6px;margin-bottom:16px;display:none;
+}
+.error-msg.show{display:block;}
+.toast{
+  position:fixed;bottom:26px;left:50%;transform:translate(-50%,20px);
+  background:#0d1a24;border:1px solid var(--accent);color:#fff;
+  padding:14px 22px;border-radius:12px;font-family:'Rajdhani',sans-serif;font-weight:600;
+  box-shadow:0 0 25px rgba(0,229,255,.3);opacity:0;pointer-events:none;
+  transition:opacity .3s ease, transform .3s ease;z-index:999;
+}
+.toast.show{opacity:1;transform:translate(-50%,0);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo-box">
+    <img src="https://i.ibb.co.com/qY8qkVmK/1783423740859.png" alt="Logo BERONED ROLEPLAY">
+    <h1>BERONED ROLEPLAY</h1>
+    <div class="sub">Pendaftaran Fraksi</div>
+  </div>
+
+  <div class="card">
+    <label for="faction">Pilih Fraksi</label>
+    <select id="faction">
+      <option value="">— Pilih salah satu fraksi —</option>
+      <optgroup label="Pemerintah / Hukum">
+        <option>Polisi LS</option>
+        <option>Polisi SF</option>
+        <option>Polisi LV</option>
+        <option>FBI</option>
+        <option>Tentara AD</option>
+        <option>Tentara AL</option>
+        <option>Tentara AU</option>
+        <option>Administrasi Presiden</option>
+        <option>Pusat Radio</option>
+      </optgroup>
+      <optgroup label="Gangster / Kriminal">
+        <option>Bandidos MC</option>
+        <option>East Side Ballas</option>
+        <option>Los Santos Vagos</option>
+        <option>Russian Mafia</option>
+        <option>Grove Gang</option>
+        <option>Varrios Los Aztecas</option>
+        <option>Rifa Gang</option>
+        <option>Yakuza Mafia</option>
+        <option>Columbian Mafia</option>
+      </optgroup>
+      <optgroup label="Job / Layanan">
+        <option>Rumah Sakit Los Santos</option>
+        <option>Rumah Sakit San Fierro</option>
+        <option>Rumah Sakit Las Venturas</option>
+        <option>Mekanik</option>
+        <option>Pedagang</option>
+        <option>Gojek Driver</option>
+      </optgroup>
+    </select>
+  </div>
+
+  <div class="card" id="formSection">
+    <div class="form-title" id="formTitle">Form Pendaftaran</div>
+    <form id="regForm">
+      <label>Nama IC</label>
+      <input type="text" id="namaIC" placeholder="Nama karakter di dalam game">
+
+      <label>Umur IC</label>
+      <input type="number" id="umurIC" placeholder="Umur karakter">
+
+      <label>Asal IC</label>
+      <input type="text" id="asalIC" placeholder="Asal karakter (contoh: Los Santos)">
+
+      <label>Nama OOC</label>
+      <input type="text" id="namaOOC" placeholder="Nama asli kamu">
+
+      <label>Umur OOC</label>
+      <input type="number" id="umurOOC" placeholder="Umur asli kamu">
+
+      <label>Asal OOC</label>
+      <input type="text" id="asalOOC" placeholder="Asal daerah kamu">
+
+      <label>Alasan Ingin Bergabung</label>
+      <textarea id="alasan" placeholder="Jelaskan alasan kamu ingin bergabung"></textarea>
+
+      <label>Sebutkan 5 Visi</label>
+      <textarea id="visi" placeholder="1. ...&#10;2. ...&#10;3. ...&#10;4. ...&#10;5. ..."></textarea>
+
+      <label>Sebutkan 5 Misi</label>
+      <textarea id="misi" placeholder="1. ...&#10;2. ...&#10;3. ...&#10;4. ...&#10;5. ..."></textarea>
+
+      <label>Pengalaman Sebelumnya <span style="color:var(--text-dim);font-weight:400;">(opsional)</span></label>
+      <textarea id="pengalaman" placeholder="Pengalaman roleplay/fraksi sebelumnya, jika ada"></textarea>
+
+      <label>Waktu Aktif Bermain</label>
+      <input type="text" id="waktuAktif" placeholder="Contoh: 19.00 - 23.00 WIB">
+
+      <label>Nomor WhatsApp Aktif</label>
+      <input type="text" id="nomorWA" placeholder="Contoh: 6281234567890">
+
+      <label>Siap Menerima Konsekuensi Jika Tidak Mengikuti Aturan?</label>
+      <div class="radio-row" id="konsekuensiRow">
+        <label class="radio-opt" id="optYa"><input type="radio" name="konsekuensi" value="Ya">Ya, Saya Siap</label>
+        <label class="radio-opt" id="optTidak"><input type="radio" name="konsekuensi" value="Tidak">Tidak</label>
+      </div>
+      <div class="error-msg" id="errorMsg"></div>
+
+      <button type="submit" class="btn">Kirim Pendaftaran</button>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast">Mengirim...</div>
+
+<script>
+const factionSelect=document.getElementById('faction');
+const formSection=document.getElementById('formSection');
+const formTitle=document.getElementById('formTitle');
+const regForm=document.getElementById('regForm');
+const errorMsg=document.getElementById('errorMsg');
+const toast=document.getElementById('toast');
+const optYa=document.getElementById('optYa');
+const optTidak=document.getElementById('optTidak');
+
+factionSelect.addEventListener('change',()=>{
+  if(factionSelect.value){
+    formTitle.textContent='Form Pendaftaran — '+factionSelect.value;
+    formSection.classList.add('open');
+  }else{
+    formSection.classList.remove('open');
+  }
+});
+
+document.querySelectorAll('input[name="konsekuensi"]').forEach(r=>{
+  r.addEventListener('change',()=>{
+    optYa.classList.toggle('checked-yes',optYa.querySelector('input').checked);
+    optTidak.classList.toggle('checked-no',optTidak.querySelector('input').checked);
+  });
+});
+
+function val(id){return document.getElementById(id).value.trim();}
+
+regForm.addEventListener('submit',(e)=>{
+  e.preventDefault();
+  errorMsg.classList.remove('show');
+
+  const fields={
+    namaIC:val('namaIC'), umurIC:val('umurIC'), asalIC:val('asalIC'),
+    namaOOC:val('namaOOC'), umurOOC:val('umurOOC'), asalOOC:val('asalOOC'),
+    alasan:val('alasan'), visi:val('visi'), misi:val('misi'),
+    waktuAktif:val('waktuAktif'), nomorWA:val('nomorWA')
+  };
+  const pengalaman=val('pengalaman');
+  const konsekuensi=document.querySelector('input[name="konsekuensi"]:checked');
+
+  const kosong=Object.values(fields).some(v=>v==='');
+  if(kosong){
+    errorMsg.textContent='Semua field wajib harus diisi (kecuali Pengalaman Sebelumnya).';
+    errorMsg.classList.add('show');
+    return;
+  }
+  if(!konsekuensi){
+    errorMsg.textContent='Silakan pilih kesiapan menerima konsekuensi terlebih dahulu.';
+    errorMsg.classList.add('show');
+    return;
+  }
+  if(konsekuensi.value==='Tidak'){
+    errorMsg.textContent='Pendaftaran tidak dapat dilanjutkan karena kamu belum siap menerima konsekuensi.';
+    errorMsg.classList.add('show');
+    return;
+  }
+
+  const namaFraksi=factionSelect.value;
+  const teks=
+`PENDAFTARAN FRAKSI ${namaFraksi.toUpperCase()} — BERONED ROLEPLAY
+
+Nama IC: ${fields.namaIC}
+Umur IC: ${fields.umurIC}
+Asal IC: ${fields.asalIC}
+Nama OOC: ${fields.namaOOC}
+Umur OOC: ${fields.umurOOC}
+Asal OOC: ${fields.asalOOC}
+
+Alasan bergabung:
+${fields.alasan}
+
+Visi:
+${fields.visi}
+
+Misi:
+${fields.misi}
+
+Pengalaman sebelumnya:
+${pengalaman || '-'}
+
+Waktu aktif bermain: ${fields.waktuAktif}
+Nomor WhatsApp: ${fields.nomorWA}
+Siap menerima konsekuensi: Ya`;
+
+  const submitBtn=regForm.querySelector('button[type="submit"]');
+  submitBtn.disabled=true;
+  submitBtn.textContent='Mengirim...';
+  toast.textContent='Mengirim pendaftaran...';
+  toast.classList.add('show');
+
+  const payload=new FormData();
+  payload.append('_subject','Pendaftaran Fraksi '+namaFraksi+' - BERONED ROLEPLAY');
+  payload.append('Fraksi',namaFraksi);
+  payload.append('Isi Pendaftaran',teks);
+  payload.append('_template','box');
+  payload.append('_captcha','false');
+
+  fetch('https://formsubmit.co/ajax/soparsinurat12@gmail.com',{
+    method:'POST',
+    headers:{'Accept':'application/json'},
+    body:payload
+  })
+  .then(res=>{
+    if(!res.ok) throw new Error('Gagal mengirim');
+    toast.textContent='Pendaftaran berhasil terkirim!';
+    setTimeout(()=>toast.classList.remove('show'),2500);
+    regForm.reset();
+    formSection.classList.remove('open');
+    factionSelect.value='';
+    optYa.classList.remove('checked-yes');
+    optTidak.classList.remove('checked-no');
+  })
+  .catch(()=>{
+    toast.textContent='Gagal mengirim, coba lagi ya.';
+    setTimeout(()=>toast.classList.remove('show'),2500);
+  })
+  .finally(()=>{
+    submitBtn.disabled=false;
+    submitBtn.textContent='Kirim Pendaftaran';
+  });
+});
+</script>
+</body>
+</html>
